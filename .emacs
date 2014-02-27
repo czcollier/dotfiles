@@ -32,12 +32,19 @@
 ;; add the emacs-eclim source
 ;(require 'ac-emacs-eclim-source)
 ;(ac-emacs-eclim-config)
+(add-to-list 'load-path "~/.emacs.d/")
+(require 'auto-complete-config)
+;(add-to-list 'ac-dictionary-directories "~/.emacs.d//ac-dict")
+(ac-config-default)
 
-(require 'company)
-(require 'company-emacs-eclim)
-(company-emacs-eclim-setup)
-(global-company-mode t)
+;; add the emacs-eclim source
+(require 'ac-emacs-eclim-source)
+(ac-emacs-eclim-config)
 
+;(require 'company)
+;(require 'company-emacs-eclim)
+;(company-emacs-eclim-setup)
+;(add-hook 'after-init-hook 'global-company-mode)
 ;(custom-set-variables
 ;  '(eclim-eclipse-dirs '("/home/ccollier/devel/tools/eclipse-4.3")))
 
