@@ -1,0 +1,4 @@
+.git/
+deploy.sh
+README.md
+deploy-excludes.txt
