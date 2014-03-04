@@ -48,6 +48,11 @@
 ;(custom-set-variables
 ;  '(eclim-eclipse-dirs '("/home/ccollier/devel/tools/eclipse-4.3")))
 
+;; Java stuff
+(defun my-indent-setup ()
+  (c-set-offset 'arglist-intro '+))
+(add-hook 'java-mode-hook 'my-indent-setup)
+
 ;;; scala-mode2
 (package-initialize)
 (unless (package-installed-p 'scala-mode2)
@@ -84,6 +89,12 @@
 (require 'linum)
 (global-linum-mode t)
 
+;; coding stuff ;;
+(setq-default indent-tabs-mode nil)
+
+; don't align multi-line lists in c/java
+(setq c-offsets-alist '((arglist-cont-nonempty . +)))
+
 ; no line wrapping
 (set-default 'truncate-lines t)
 
@@ -104,7 +115,25 @@
 (scroll-bar-mode -1)
 
 (custom-set-faces
- '(default ((t (:family "Ubuntu Mono" :foundry "unknown" :slant normal :weight normal :height 98 :width normal)))))
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Ubuntu Mono" :foundry "unknown" :slant normal :weight normal :height 98 :width normal))))
+ '(whitespace-space ((t (:foreground "gray16")))))
+
+;; make whitespace-mode use just basic coloring
+(setq whitespace-style (quote (spaces tabs newline space-mark tab-mark newline-mark)))
+
+;; whitespace mode (show whitespace) is bright yellow by default
+;; tone it down
+;;(setq whitespace-display-mappings
+;;  ;; all numbers are Unicode codepoint in decimal. ⁖ (insert-char 182 1)
+;;  '(
+;;    (space-mark 32 [183] [46]) ; 32 SPACE 「 」, 183 MIDDLE DOT 「·」, 46 FULL STOP 「.」
+;;    (newline-mark 10 [182 10]) ; 10 LINE FEED
+;;    (tab-mark 9 [9655 9] [92 9]) ; 9 TAB, 9655 WHITE RIGHT-POINTING TRIANGLE 「▷」
+;;    ))
 
 ;;disable splash screen and startup message
 (setq inhibit-startup-message t) 
@@ -118,3 +147,9 @@
 
 ;; make the window big(ger)
 (when window-system (set-frame-size (selected-frame) 110 72))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
