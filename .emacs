@@ -32,7 +32,7 @@
 ;; add the emacs-eclim source
 ;(require 'ac-emacs-eclim-source)
 ;(ac-emacs-eclim-config)
-(add-to-list 'load-path "~/.emacs.d/")
+(add-to-list 'load-path "~/.emacs.d/site-lisp")
 (require 'auto-complete-config)
 ;(add-to-list 'ac-dictionary-directories "~/.emacs.d//ac-dict")
 (ac-config-default)
@@ -41,17 +41,11 @@
 (require 'ac-emacs-eclim-source)
 (ac-emacs-eclim-config)
 
-;(require 'company)
-;(require 'company-emacs-eclim)
-;(company-emacs-eclim-setup)
-;(add-hook 'after-init-hook 'global-company-mode)
-;(custom-set-variables
-;  '(eclim-eclipse-dirs '("/home/ccollier/devel/tools/eclipse-4.3")))
-
 ;; Java stuff
-(defun my-indent-setup ()
-  (c-set-offset 'arglist-intro '+))
-(add-hook 'java-mode-hook 'my-indent-setup)
+; don't align multi-line lists in c/java
+(setq c-offsets-alist '((arglist-cont-nonempty . +)))
+(c-set-offset 'arglist-intro '+)
+
 
 ;;; scala-mode2
 (package-initialize)
@@ -74,8 +68,6 @@
 ; enable X clipboard
 (setq x-select-enable-clipboard t)
 
-
-
 ;;; editing/navigating customizations ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -89,11 +81,12 @@
 (require 'linum)
 (global-linum-mode t)
 
-;; coding stuff ;;
+; no tabs
 (setq-default indent-tabs-mode nil)
-
-; don't align multi-line lists in c/java
-(setq c-offsets-alist '((arglist-cont-nonempty . +)))
+;; highlight tabs and trailing whitespace
+(require 'highlight-chars)
+(add-hook 'font-lock-mode-hook 'hc-highlight-tabs)
+(add-hook 'font-lock-mode-hook 'hc-highlight-trailing-whitespace)
 
 ; no line wrapping
 (set-default 'truncate-lines t)
