@@ -55,8 +55,8 @@ dfn {
     font-style: italic
 }
 mark {
-    background: #ff0;
-    color: #000
+    background: #444;
+    color: #DDE
 }
 code,
 kbd,
